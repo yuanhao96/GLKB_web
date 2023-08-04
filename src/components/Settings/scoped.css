@@ -1,0 +1,41 @@
+all {
+    font-family: 'Mundial' !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 15px !important;
+}
+
+.settings {
+    position: fixed;
+    top: 14vh;
+    left: -33vw;
+    height: 83vh;
+    width: 31vw;
+	margin-left: 2vw;
+    padding: 1%;
+	border-radius: 21px;
+    z-index: 1;
+    opacity: 0.95;
+    transition: left 0.3s ease-in-out;
+    background-color: #F8F8F8;
+}
+.settings-button {
+    position: fixed;
+    top: 20vh;
+    left: 0;
+    z-index: 1;
+    opacity: 0.95;
+    transition: left 0.3s ease-in-out;
+}
+.settings-button.open {
+    left: 33vw;
+}
+.settings.open {
+	left: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.ant-transfer-list-header-selected {
+    display: none;
+}

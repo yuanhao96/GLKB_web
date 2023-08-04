@@ -1,0 +1,111 @@
+all {
+    font-family: 'Mundial' !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 15px !important;
+}
+
+.information {
+    position: fixed;
+    top: 14vh;
+    right: -33vw;
+    height: 83vh;
+    width: 31vw;
+	margin-right: 2vw;
+	border-radius: 21px;
+    opacity: 0.95;
+    transition: right 0.3s ease-in-out;
+    background-color: #F7F7F7
+    /* background-color: red; */
+}
+
+.information-button {
+    position: fixed;
+    top: 20vh;
+    right: 0;
+    z-index: 1;
+    opacity: 0.95;
+    transition: right 0.3s ease-in-out;
+}
+.information-button.open {
+    right: 33vw;
+}
+.information.open {
+	right: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.article-container {
+    margin: 3%;
+}
+
+.article-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.article-authors {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.article-id {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #464BBF;
+}
+
+.abstract-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.abstract-content {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.term-container {
+    margin: 3%;
+}
+
+.termTitle {
+    font-family: 'Mundial';
+    font-style: normal;
+    font-weight: 600;
+    /* font-size: 13.3151px; */
+    font-size: 15px;
+    line-height: 13px;
+}
+
+.termContent {
+    font-family: 'Mundial';
+    font-style: normal;
+    font-weight: 300;
+    /* font-size: 13.3151px; */
+    font-size: 15px;
+    /* line-height: 13px; */
+}
+
+.termClass {
+    /* margin: 3%; */
+    /* margin-top: 5%; */
+    margin-bottom: 3%;
+}

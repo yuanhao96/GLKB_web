@@ -1,0 +1,180 @@
+.home-container {
+    width: 100vw;
+    /* height: 350vh; */
+    height: 0;
+}
+
+.home-head-container {
+    padding-top: 60px;
+    width: 100vw;
+    height: 70vh;
+    /* background-color: #304464; */
+    background-color: #3C4556;
+    text-align: center;
+    padding-bottom: 20vh;
+}
+
+.termContainer {
+    float: left;
+    background-color: #8EB0CF;
+    text-align: left;
+    width: 550px;
+    border-radius: 8px;
+    height: 70px;
+    /* margin-right: 0px; */
+    overflow: hidden;
+}
+
+.search-bar {
+    margin-top: 10px;
+    vertical-align: top;
+    width: 550px;
+    float: left;
+}
+
+.tag-box {
+    background-color: white;
+}
+
+.map-button {
+    width: 120px;
+    height: 120px;
+    float: right;
+    border-radius: 8px;
+    margin-right: 60px;
+    background-color: #7589BB;
+    font-size: 25px;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+h2 {
+    color: #FFFFFF;
+    font-weight: 600;
+    size: 25px;
+}
+
+.head-text {
+    padding-top: 30px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+.search-container {
+    padding-top: 100px;
+    height: 250px;
+    width: 750px;
+    margin: 0 auto;
+}
+
+.search-input {
+    vertical-align: top;
+    outline: none;
+    border: none;
+    width: 800px;
+    height: 60px;
+}
+
+.search-button {
+    vertical-align: top;
+    outline: none;
+    border: none;
+    height: 60px;
+    width: 200px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 40px;
+    color: white;
+    background-color: #85A7CC;
+}
+
+.search-button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.feature-container {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.feature-heading {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 50px;
+    color: #3C4556;
+}
+
+.bar {
+    margin-left: 10%;
+    margin-top: 90vh;
+    background-color: #3C4556;
+    height: 1px;
+    width: 100vw;
+}
+
+.credits-container {
+    padding-top: 50px;
+}
+
+.credits-heading {
+    margin-left: 10%;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 50px;
+    color: #3C4556;
+}
+
+.footer-container {
+    /* margin-top: 65vw; */
+    height: 37vh;
+    width: 100vw;
+    padding-bottom: 7vh;
+    bottom: 0;
+    background-color: #3C4556;
+}
+
+.UMichLogo-container {
+    padding-top: 50px;
+    padding-left: 100px;
+    float: left;
+}
+
+.Department-container {
+    line-height: 100%;
+    padding-top: 50px;
+    padding-left: 30px;
+    color: white;
+    float: left;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 30px;
+    width: 350px;
+}
+
+.contact-container {
+    padding-left: 200px;
+    float: left;
+}
+
+.contact-heading {
+    padding-top: 50px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+.address-container {
+    clear: both;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 25px;
+    color: white;
+    padding-top: 30px;
+    padding-left: 120px;
+}
+
+.footnote-container {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 18px;
+    color: white;
+    padding-top: 30px;
+    padding-left: 120px;
+    width: 680px;
+}
