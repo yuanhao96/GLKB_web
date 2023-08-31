@@ -56,6 +56,7 @@ const HomePage = () => {
             e.preventDefault();
             handleClose(tag);
             }}
+            style={{ border: '1px solid #4F4F4F', borderRadius: '18px' }}
         >
             {tag}
         </Tag>
