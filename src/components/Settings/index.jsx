@@ -8,6 +8,7 @@ import {
 import View from './view';
 import Filter from './filter';
 import Table from './table'
+import NodeTable from "./existNodeTable";
 
 const { Panel } = Collapse;
 
@@ -82,6 +83,15 @@ const Settings = props => {
             {/*</Button>*/}
             <Table 
                 isTableOpen = {props.isTableOpen}
+                toggleTable = {props.toggleTable}
+                data = {props.data}
+                setData = {props.setData}
+                allNodes = {props.allNodes}
+                setGraphData = {props.setGraphData}
+                graphShownData = {props.graphShownData}
+            />
+            <NodeTable
+                isTableOpen = {0}
                 toggleTable = {props.toggleTable}
                 data = {props.data}
                 setData = {props.setData}

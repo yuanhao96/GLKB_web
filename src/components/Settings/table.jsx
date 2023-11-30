@@ -154,9 +154,9 @@ const App = (props) => {
     }
 
     return (
-      <div className={tableClass} style={{width: '80%', marginLeft: '10%', alignItems: 'center'}}>
+      <div className={tableClass} style={{width: '35%', marginLeft: '10%', alignItems: 'center'}}>
         <div style={{ backgroundColor: '#f0f2f5', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-        <Button onClick={openTable} type="primary">More Biomedical Terms</Button>
+        {/*<Button onClick={openTable} type="primary">More Biomedical Terms</Button>*/}
         
         <div style={{ display: 'flex', marginTop: '20px' }}>
             <div style={{ flex: '0 0 50%', marginRight: '20px' }}>
@@ -174,19 +174,6 @@ const App = (props) => {
                 onSelect={onSelect}
                 selectedKeys={selectedKeys}
                 treeData={leftData}
-            />
-            </div>
-
-            <div style={{ flex: '0 0 50%', paddingLeft: '20px' }}>
-            <h3 style={{ marginBottom: '8px', fontSize: '16px', color: '#1890ff' }}>Current Terms in Graph</h3>
-            <Input.Search style={{ marginBottom: '8px' }} placeholder="Search" onSearch={(value) => onSearch(value, 'right')} />
-            <Tree
-                blockNode
-                height={200}
-                onExpand={onExpandRight}
-                expandedKeys={expandedKeysRight}
-                autoExpandParent={autoExpandParentRight}
-                treeData={rightData}
             />
             </div>
         </div>

@@ -449,7 +449,15 @@ const ResultPage = () => {
             {/* Filter Bar */}
             <div className="line"></div>
 
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '180px'}}>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'left',
+                alignItems: 'center',
+                height: '200px',
+                marginLeft: '19px',
+                marginTop: '35px',
+                width:'30vw'
+            }}>
                 <div style={{
                     textAlign: 'left',
                     width: '600px',

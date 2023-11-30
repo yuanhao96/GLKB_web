@@ -7,13 +7,13 @@ all {
 
 .settings {
     position: fixed;
-    top: 14vh;
+    top: 22vh;
     left: -33vw;
-    height: 18vh;
-    width: 22vw;
-	  margin-left: 2vw;
+    height: 22vh;
+    width: 30vw;
+    margin-left: 2vw;
     padding: 1%;
-	  border-radius: 21px;
+    border-radius: 21px;
     z-index: 1;
     opacity: 0.95;
     transition: left 0.3s ease-in-out;
@@ -77,4 +77,9 @@ all {
 .legend-label {
     font-size: 14px;
 }
-  
+
+
+.existNodeTableClass {
+    position: fixed;
+    bottom: 200px;
+}
