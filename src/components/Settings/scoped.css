@@ -81,5 +81,9 @@ all {
 
 .existNodeTableClass {
     position: fixed;
-    bottom: 200px;
+    bottom: -260px;
+}
+
+.existNodeTableOpenClass {
+    bottom: 0vh;
 }

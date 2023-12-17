@@ -30,7 +30,7 @@ const App = (props) => {
 
     let initRightTreeData = [];
     useEffect(() => {
-        if (props.graphShownData != {}) {
+        if (props.graphShownData !== {}) {
             initRightTreeData = []
             if (props.graphShownData.nodes) {
                 for (let i = 0; i < props.graphShownData.nodes.length; i++) {
@@ -59,7 +59,8 @@ const App = (props) => {
     const [autoExpandParentRight, setAutoExpandParentRight] = useState(false);
     const [rightData, setRightData] = useState(initRightTreeData)
     const [leftData, setLeftData] = useState(existingNodes);
-    const tableClass = props.isTableOpen ? "table open" : "table";
+    // const tableClass = props.isTableOpen ? "table open" : "table";
+    const tableClass = "table open";
     
     const existingNodeList = []
     for (var i = 0; i < rightData.length; i++) {
@@ -154,7 +155,7 @@ const App = (props) => {
     }
 
     return (
-      <div className={tableClass} style={{width: '35%', marginLeft: '10%', alignItems: 'center'}}>
+      <div className={tableClass} style={{width: '30%', marginLeft: '20px', alignItems: 'center'}}>
         <div style={{ backgroundColor: '#f0f2f5', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
         {/*<Button onClick={openTable} type="primary">More Biomedical Terms</Button>*/}
         

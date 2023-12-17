@@ -59,7 +59,11 @@ const NodeTable = (props) => {
     const [autoExpandParentRight, setAutoExpandParentRight] = useState(false);
     const [rightData, setRightData] = useState(initRightTreeData)
     const [leftData, setLeftData] = useState(existingNodes);
-    const tableClass = "existNodeTableClass";
+    // const tableClass = "existNodeTableClass";
+
+    console.log(props.isTableOpen);
+
+    const tableClass = props.isTableOpen ? "existNodeTableOpenClass" : "existNodeTableClass";
 
     const existingNodeList = []
     for (var i = 0; i < rightData.length; i++) {
