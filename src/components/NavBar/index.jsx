@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './scoped.css'; // Make sure to import the CSS file
 // import MedSchoolLogo from '../../img/MedSchoolLogo.png';
 import UMLogo from '../../img/block-m-feed.jpg'
+import SearchBar from '../SearchBar'
+import UMLogoSVG from "../../img/logo_white.svg";
 
 const NavBar = (props) => {
     const [input, setInput] = useState('');
@@ -63,42 +65,63 @@ const NavBar = (props) => {
     console.log(tags)
 
     return (
-        <nav className="navbar">
-                <div className="left-section">
-                    <div className="logo">
-                        <a href="/">
-                            <img src={UMLogo} alt="UMLogo" style={{ width: 'auto', height: '90px' }} />
-                        </a>
-                    </div>
-                    {/* <div className="nav-button">
-                        <a href="/">Home</a>
-                    </div> */}
-                </div>
 
-                <div className="center-section">
-                    <div className="search-input" onClick={() => inputRef.current && inputRef.current.focus()}>
-                        {tags.map((tag, index) => (
-                            <span key={index} className="search-tag">
-                                {tag}
-                                <span className="delete-tag" onClick={() => setTags(tags.filter((_, i) => i !== index))}>&times;</span>
-                            </span>
-                        ))}
-                        <span
-                            ref={inputRef}
-                            contentEditable
-                            className="editable-input"
-                            onInput={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                            role="textbox"
-                            aria-multiline="false"
-                        />
-                    </div>
-                    <button onClick={handleSearch}>Search</button>
-                </div>
-                <div className="nav-button right-section">
-                    <a href="https://glkb.dcmb.med.umich.edu/docs" target="_blank">API Doc</a>
-                </div>
+        <nav className="navbar">
+            <a href="/" className="home-link">
+                <img src={UMLogoSVG} alt="Home" />
+            </a>
+            <SearchBar
+                handleSearchTags = {handleSearch}
+                tags = {tags}
+                setTags = {setTags}
+            />
+            <div className="nav-links">
+                <a href="/about">About</a>
+                <a href="/api-doc">API Doc</a>
+                <a href="/contact-us">Contact Us</a>
+            </div>
         </nav>
+        // <nav className="navbar">
+        //         <div className="left-section">
+        //             <div className="logo">
+        //                 <a href="/">
+        //                     <img src={UMLogo} alt="UMLogo" style={{ width: 'auto', height: '90px' }} />
+        //                 </a>
+        //             </div>
+        //             {/* <div className="nav-button">
+        //                 <a href="/">Home</a>
+        //             </div> */}
+        //         </div>
+        //         <SearchBar
+        //             handleSearchTags = {handleSearch}
+        //             tags = {tags}
+        //             setTags = {setTags}
+        //         />
+        //
+        //         {/*<div className="center-section">*/}
+        //         {/*    <div className="search-input" onClick={() => inputRef.current && inputRef.current.focus()}>*/}
+        //         {/*        {tags.map((tag, index) => (*/}
+        //         {/*            <span key={index} className="search-tag">*/}
+        //         {/*                {tag}*/}
+        //         {/*                <span className="delete-tag" onClick={() => setTags(tags.filter((_, i) => i !== index))}>&times;</span>*/}
+        //         {/*            </span>*/}
+        //         {/*        ))}*/}
+        //         {/*        <span*/}
+        //         {/*            ref={inputRef}*/}
+        //         {/*            contentEditable*/}
+        //         {/*            className="editable-input"*/}
+        //         {/*            onInput={handleInputChange}*/}
+        //         {/*            onKeyDown={handleKeyDown}*/}
+        //         {/*            role="textbox"*/}
+        //         {/*            aria-multiline="false"*/}
+        //         {/*        />*/}
+        //         {/*    </div>*/}
+        //         {/*    <button onClick={handleSearch}>Search</button>*/}
+        //         {/*</div>*/}
+        //         <div className="nav-button right-section">
+        //             <a href="https://glkb.dcmb.med.umich.edu/docs" target="_blank">API Doc</a>
+        //         </div>
+        // </nav>
 
     );
 };
