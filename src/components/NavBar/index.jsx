@@ -64,40 +64,40 @@ const NavBar = (props) => {
 
     return (
         <nav className="navbar">
-                <div className="left-section">
-                    <div className="logo">
-                        <a href="/">
-                            <img src={UMLogo} alt="UMLogo" style={{ width: 'auto', height: '90px' }} />
-                        </a>
-                    </div>
-                    {/* <div className="nav-button">
+            <div className="left-section">
+                <div className="logo">
+                    <a href="/">
+                        <img src={UMLogo} alt="UMLogo" style={{ width: 'auto', height: '90px' }} />
+                    </a>
+                </div>
+                {/* <div className="nav-button">
                         <a href="/">Home</a>
                     </div> */}
-                </div>
+            </div>
 
-                <div className="center-section">
-                    <div className="search-input" onClick={() => inputRef.current && inputRef.current.focus()}>
-                        {tags.map((tag, index) => (
-                            <span key={index} className="search-tag">
+            <div className="center-section">
+                <div className="search-input" onClick={() => inputRef.current && inputRef.current.focus()}>
+                    {tags.map((tag, index) => (
+                        <span key={index} className="search-tag">
                                 {tag}
-                                <span className="delete-tag" onClick={() => setTags(tags.filter((_, i) => i !== index))}>&times;</span>
+                            <span className="delete-tag" onClick={() => setTags(tags.filter((_, i) => i !== index))}>&times;</span>
                             </span>
-                        ))}
-                        <span
-                            ref={inputRef}
-                            contentEditable
-                            className="editable-input"
-                            onInput={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                            role="textbox"
-                            aria-multiline="false"
-                        />
-                    </div>
-                    <button onClick={handleSearch}>Search</button>
+                    ))}
+                    <span
+                        ref={inputRef}
+                        contentEditable
+                        className="editable-input"
+                        onInput={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                        role="textbox"
+                        aria-multiline="false"
+                    />
                 </div>
-                <div className="nav-button right-section">
-                    <a href="https://glkb.dcmb.med.umich.edu/docs" target="_blank">API Doc</a>
-                </div>
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div className="nav-button right-section">
+                <a href="https://glkb.dcmb.med.umich.edu/docs" target="_blank">API Doc</a>
+            </div>
         </nav>
 
     );

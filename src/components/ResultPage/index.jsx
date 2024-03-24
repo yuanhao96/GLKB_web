@@ -121,10 +121,10 @@ const ResultPage = () => {
             const uniqueIds = new Set();
             const filteredNodes = [];
             nodeIds.forEach(node => {
-            if (!uniqueIds.has(node.data.id)) {
-                uniqueIds.add(node.data.id);
-                filteredNodes.push(node);
-            }
+                if (!uniqueIds.has(node.data.id)) {
+                    uniqueIds.add(node.data.id);
+                    filteredNodes.push(node);
+                }
             });
             const filteredEdges = data.edges.filter(edge =>
                 nodeIdsToKeep.includes(edge.data.source) && nodeIdsToKeep.includes(edge.data.target)
@@ -169,7 +169,7 @@ const ResultPage = () => {
     return (
         <div className="result-container">
 
-            <NavBar 
+            <NavBar
                 handleSearchTags = {handleSearch}
                 tags = {tags}
                 setTags = {setTags}
