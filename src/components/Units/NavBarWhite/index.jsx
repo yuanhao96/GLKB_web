@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './scoped.css'; // This is where you will import your CSS from
-import logo_l from '../../../img/logo_l.svg'
+import logo_l from '../../../img/blue_l.svg'
 
 function NavBarWhite() {
     return (
