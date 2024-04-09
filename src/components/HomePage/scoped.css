@@ -11,7 +11,7 @@
     /*justify-content: center;*/
     flex: 1; /* This will push the footer down */
     /* Rest of your content styling */
-    padding-top: 150px;
+    padding-top: 100px;
 }
 
 .content img{
