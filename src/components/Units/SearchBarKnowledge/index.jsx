@@ -19,7 +19,7 @@ export default function SearchBarKnowledge() {
     const [moreRel, setMoreRel] = React.useState(false);
 
     const showAdvance = true;
-    const relationTypes = ["include", "Type1", "Type2", "Type3"];
+    const relationTypes = ["Associate", "Bind", "Comparison", "Cotreatment", "PositiveCorrelation", "NegativeCorrelation"];
 
     const example_data = {
         "triplets": [
@@ -43,6 +43,87 @@ export default function SearchBarKnowledge() {
         }
     };
 
+    const example_node_data = [{'element_id': 'mesh:D016158',
+        'name': 'Genes, p53',
+        'aliases': [],
+        'type': 'Entity',
+        'external_sources': {'mesh': 'D016158'},
+        'n_citations': 20592,
+        'database_id': '92088230',
+        'description': 'Tumor suppressor genes located on the short arm of human chromosome 17 and coding for the phosphoprotein p53.'},
+        {'element_id': 'efo:1002010',
+            'name': 'TP53 Positive Breast Carcinoma',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'efo': '1002010'},
+            'n_citations': 0,
+            'database_id': '89120777',
+            'description': 'A biologic subset of breast carcinoma defined by high expression of TP53'},
+        {'element_id': 'hgnc:53222',
+            'name': 'LINC02303',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'hgnc': '53222'},
+            'n_citations': 4,
+            'database_id': '91739502',
+            'description': 'long intergenic non-protein coding RNA 2303'},
+        {'element_id': 'doid:0080705',
+            'name': 'medulloblastoma SHH activated and TP53 wild-type',
+            'aliases': [],
+            'type': 'DiseaseOrPhenotypicFeature',
+            'external_sources': {'doid': '0080705'},
+            'n_citations': 0,
+            'database_id': '91695654',
+            'description': 'A medulloblastoma SHH activated that is characterized as a molecular subtype by activation of the sonic hedgehog (SHH) pathway and the absence of TP53 mutations.'},
+        {'element_id': 'hgnc:11998',
+            'name': 'TP53',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'hgnc': '11998'},
+            'n_citations': 100947,
+            'database_id': '91705649',
+            'description': 'tumor protein p53'},
+        {'element_id': 'hgnc:17026',
+            'name': 'TP53TG1',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'hgnc': '17026'},
+            'n_citations': 25,
+            'database_id': '91710884',
+            'description': 'TP53 target 1'},
+        {'element_id': 'reactome:R-HSA-5633007',
+            'name': 'Regulation of TP53 Activity',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'reactome': 'R-HSA-5633007'},
+            'n_citations': 0,
+            'database_id': '494066359',
+            'description': 'Regulation of TP53 Activity'},
+        {'element_id': 'efo:0008382',
+            'name': 'TP53 mutation status',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'efo': '0008382'},
+            'n_citations': 0,
+            'database_id': '89111596',
+            'description': 'quantification of some aspect of TP53 mutation, such as the number of accummulated mutations, determined either through immunohistochemistry or DNA sequencing'},
+        {'element_id': 'hgnc:17296',
+            'name': 'RRM2B',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'hgnc': '17296'},
+            'n_citations': 247,
+            'database_id': '91685803',
+            'description': 'ribonucleotide reductase regulatory TP53 inducible subunit M2B'},
+        {'element_id': 'reactome:R-HSA-3700989',
+            'name': 'Transcriptional Regulation by TP53',
+            'aliases': [],
+            'type': 'Entity',
+            'external_sources': {'reactome': 'R-HSA-3700989'},
+            'n_citations': 0,
+            'database_id': '494065120',
+            'description': 'Transcriptional Regulation by TP53'}];
+
 
     const updateSource = (value) => {
         if (value.trim() === '') {
@@ -54,9 +135,12 @@ export default function SearchBarKnowledge() {
             //     `Option ${value + "$$$$"}`,
             // ]);
             // TODO: Connect and set this to call API to autocomplete
-            setSourceNodeOptions([
-                value
-            ]);
+            // setSourceNodeOptions([
+            //     value
+            // ]);
+            setSourceNodeOptions(
+                example_node_data.map(node => node['name'])
+            );
             const newTriplet = [value, triplets[1], triplets[2]];
             setTriplets(newTriplet);
 
@@ -73,9 +157,12 @@ export default function SearchBarKnowledge() {
             //     `Option ${value + "$$$$"}`,
             // ]);
             // TODO: Connect and set this to call API to autocomplete
-            setTargetNodeOptions([
-                value
-            ]);
+            // setTargetNodeOptions([
+            //     value
+            // ]);
+            setTargetNodeOptions(
+                example_node_data.map(node => node['name'])
+            );
             const newTriplet = [triplets[0], triplets[1], value];
             setTriplets(newTriplet);
 
@@ -129,7 +216,7 @@ export default function SearchBarKnowledge() {
         if (triplets[0] === "" && triplets[1] === "" && triplets[2] === "") return;
 
         // let newKey = chipData.length;
-        let chip_str = triplets.map(item => item === "" ? "null" : item).join(", ");
+        let chip_str = triplets.map(item => item === "" ? "null" : ("{" + item + "}")).join(", ");
         if (chipData.includes((chip_str))) return;
         // chipData.push({key:newKey, label:''})
         // const newData = [...chipData, {key:newKey, label:chip_str}]
@@ -150,11 +237,11 @@ export default function SearchBarKnowledge() {
         //Create search result based on the status
         let search_data = {
             "triplets": chipData.map(triplet =>{
-                const parts = triplet.split(", ");
+                const parts = triplet.replace(/{|}/g, "").split(", ");
                 return {
-                    "source": parts[0],
-                    "rel": parts[1],
-                    "target": parts[2]
+                    "source": parts[0].trim(),
+                    "rel": parts[1].trim(),
+                    "target": parts[2].trim()
                 };
             }),
             "params": {
