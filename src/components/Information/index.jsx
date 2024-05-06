@@ -19,6 +19,8 @@ const Information = props => {
     const [edgeDetail, setEdgeDetail] = useState({});
     const [activeKey, setActiveKey] = useState(0);
 
+    const merge = true;
+
     const handleCollapseChange = key => {
         // Make the edge collapse panel act same time with the article collapse component
         setActiveKey(key);
@@ -145,7 +147,7 @@ const Information = props => {
                             <div>Loading... or you have not yet select any node or edge</div>
                        </div>
                     )}
-                    {Object.keys(nodeDetail).length !== 0 && (
+                    {Object.keys(nodeDetail).length !== 0 && !merge &&(
 
                         <div >
                             {/*<div className='fixed-row'>*/}
@@ -175,6 +177,47 @@ const Information = props => {
                                         </ul>
                                     </Descriptions.Item>
                                 </Descriptions>
+                            </div>
+                        </div>
+                    )}
+                    {Object.keys(nodeDetail).length !== 0 && merge && (
+
+                        <div>
+                            {/*<div className='fixed-row'>*/}
+                            <div className="sticky-title">
+                                <h3 style={{color: '#014484', fontSize: 20, fontWeight: 'bold'}}>{nodeDetail[0].name.charAt(0).toUpperCase() + nodeDetail[0].name.slice(1)}</h3>
+                            </div>
+                            <div className='article-container'>
+                                <Collapse accordion activeKey={activeKey} onChange={handleCollapseChange}>
+                                    {nodeDetail.map((node, index) => (
+                                        <Panel header={node} key={index}>
+                                            <div className='edge-article-container'>
+                                                {/*<Descriptions title="Edge Details" bordered column={1}>*/}
+                                                <Descriptions column={1}  size="small" className="custom-descriptions" style={{borderRadius: '10px'}}>
+                                                    <Descriptions.Item label="Entity ID">{node[0].element_id}</Descriptions.Item>
+                                                    {/*<Descriptions.Item label="Aliases">{node[0].aliases}</Descriptions.Item>*/}
+
+                                                    <Descriptions.Item label="Type">{node[0].type}</Descriptions.Item>
+                                                    <Descriptions.Item label="External ID">{renderExternal()}</Descriptions.Item>
+                                                    {/*<Descriptions.Item label="Description">{node[0].description}</Descriptions.Item>*/}
+                                                    {
+                                                        node[0].description && node[0].description.trim() !== "" && (
+                                                            <Descriptions.Item label="Description">{node[0].description}</Descriptions.Item>
+                                                        )
+                                                    }
+
+                                                    <Descriptions.Item label="Aliases">
+                                                        <ul>
+                                                            {node[0].aliases.map((alias) => (
+                                                                <li>{alias}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </Descriptions.Item>
+                                                </Descriptions>
+                                            </div>
+                                        </Panel>
+                                    ))}
+                                </Collapse>
                             </div>
                         </div>
                     )}
@@ -258,14 +301,6 @@ const Information = props => {
                                     )}
                                 />
                             </div>
-
-
-                            {/*{*/}
-                            {/*    urls.map((url)=>{*/}
-
-                            {/*    });*/}
-                            {/*}*/}
-
                         </div>
                     )}
                     {Object.keys(edgeDetail).length !== 0 && (
