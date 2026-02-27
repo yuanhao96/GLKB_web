@@ -497,6 +497,69 @@
     flex-grow: 1;
 }
 
+.history-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 20px 24px;
+}
+
+.history-panel-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.history-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fbff;
+    padding: 12px;
+}
+
+.history-item-time {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.history-item-question,
+.history-item-answer {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+.history-item-answer {
+    margin-top: 4px;
+    color: #475569;
+}
+
+.history-empty-state {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #64748b;
+    text-align: center;
+}
+
 .input-form {
     border-top: 1px solid #e4e6eb;
 }

@@ -30,6 +30,7 @@ import {
   Download as DownloadIcon,
   EditNote as EditNoteIcon,
   FilePresent as FilePresentIcon,
+  History as HistoryIcon,
   RateReview as RateReviewIcon,
   Refresh as RefreshIcon,
   StopCircle as StopCircleIcon,
@@ -52,6 +53,7 @@ import {
 
 import systemIcon from '../../img/LLM_logo.jpg';
 import { LLMAgentService } from '../../service/LLMAgent';
+import ChatHistoryPanel from './ChatHistory';
 import NavBarWhite from '../Units/NavBarWhite';
 import ReferenceCard from '../Units/ReferenceCard/ReferenceCard';
 import SearchButton from '../Units/SearchButton/SearchButton';
@@ -116,6 +118,9 @@ function LLMAgent() {
     const [isLoading, setIsLoading] = useState(false);
     const [streamingSteps, setStreamingSteps] = useState([]);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    const [selectedHistoryId, setSelectedHistoryId] = useState(null);
+    const [customHistoryTitles, setCustomHistoryTitles] = useState({});
     const [currentStep, setCurrentStep] = useState(0);
     const messagesEndRef = useRef(null);
     const abortControllerRef = useRef(null);
@@ -137,6 +142,33 @@ function LLMAgent() {
     }, [isProcessing]);
 
     const llmService = useMemo(() => new LLMAgentService(), []);
+    const historyItems = useMemo(() => {
+        const items = [];
+        for (let i = 0; i < chatHistory.length; i += 1) {
+            if (chatHistory[i].role !== 'user') continue;
+            let assistantIndex = -1;
+            for (let j = i + 1; j < chatHistory.length; j += 1) {
+                if (chatHistory[j].role === 'assistant') {
+                    assistantIndex = j;
+                    break;
+                }
+            }
+
+            const assistant = assistantIndex >= 0 ? chatHistory[assistantIndex] : null;
+            const hid = `${chatHistory[i].timestamp || i}-${chatHistory[i].content?.slice(0, 24) || 'chat'}`;
+            const defaultTitle = (chatHistory[i].content || 'New Chat').slice(0, 60);
+            items.push({
+                hid,
+                leading_title: customHistoryTitles[hid] || defaultTitle,
+                created_at: chatHistory[i].timestamp || '',
+                last_accessed_time: assistant?.timestamp || chatHistory[i].timestamp || '',
+                message_count: assistant ? 2 : 1,
+                userIndex: i,
+                assistantIndex: assistantIndex >= 0 ? assistantIndex : null,
+            });
+        }
+        return items.reverse();
+    }, [chatHistory, customHistoryTitles]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -372,8 +404,36 @@ function LLMAgent() {
     const handleClear = () => {
         setChatHistory([]);
         setSelectedMessageIndex(null);
+        setSelectedHistoryId(null);
+        setCustomHistoryTitles({});
         setStreamingSteps([]);
+        setIsHistoryOpen(false);
         llmService.clearHistory();
+    };
+
+    const handleHistoryToggle = () => {
+        setIsHistoryOpen(prev => !prev);
+    };
+
+    const handleSelectHistory = (item) => {
+        setSelectedHistoryId(item.hid);
+        if (typeof item.assistantIndex === 'number') {
+            setSelectedMessageIndex(item.assistantIndex);
+        } else if (typeof item.userIndex === 'number') {
+            setSelectedMessageIndex(item.userIndex);
+        }
+        setIsHistoryOpen(false);
+    };
+
+    const handleRenameHistory = async (item, nextTitle) => {
+        setCustomHistoryTitles(prev => ({ ...prev, [item.hid]: nextTitle }));
+        message.success('History title updated');
+    };
+
+    const handleDeleteHistory = (item) => {
+        setChatHistory(prev => prev.filter((_, idx) => idx !== item.userIndex && idx !== item.assistantIndex));
+        setSelectedHistoryId(prev => (prev === item.hid ? null : prev));
+        message.success('History item deleted');
     };
 
     const handleMessageClick = (index) => {
@@ -923,21 +983,54 @@ function LLMAgent() {
                                                         }}>
                                                             AI Chat
                                                         </Typography>
-                                                        <MuiButton onClick={handleClear} disabled={isLoading || chatHistory.length === 0} sx={{
-                                                            width: 92,
-                                                            height: 26,
-                                                            borderRadius: "4px",
-                                                            borderWidth: "1px",
-                                                            padding: "4px",
-                                                            gap: "4px",
-                                                            border: "1px solid #E2E8F0",
-                                                            fontSize: '11px',
-                                                            color: isLoading ? '#e0e0e0' : '#64748B',
-                                                            fontFamily: 'Open Sans, sans-serif',
-                                                        }}>
-                                                            <RateReviewIcon sx={{ fontSize: '15px' }} /> New Chat
-                                                        </MuiButton>
+                                                        <Box sx={{ display: 'flex', gap: '8px' }}>
+                                                            <MuiButton
+                                                                onClick={handleHistoryToggle}
+                                                                sx={{
+                                                                    width: 85,
+                                                                    height: 26,
+                                                                    borderRadius: "4px",
+                                                                    borderWidth: "1px",
+                                                                    padding: "4px",
+                                                                    gap: "4px",
+                                                                    border: isHistoryOpen ? "1px solid #93C5FD" : "1px solid #E2E8F0",
+                                                                    fontSize: '11px',
+                                                                    color: isHistoryOpen ? '#1D4ED8' : '#64748B',
+                                                                    backgroundColor: isHistoryOpen ? '#EFF6FF' : 'transparent',
+                                                                    fontFamily: 'Open Sans, sans-serif',
+                                                                }}
+                                                            >
+                                                                <HistoryIcon sx={{ fontSize: '14px' }} /> History
+                                                            </MuiButton>
+                                                            <MuiButton onClick={handleClear} disabled={isLoading} sx={{
+                                                                width: 92,
+                                                                height: 26,
+                                                                borderRadius: "4px",
+                                                                borderWidth: "1px",
+                                                                padding: "4px",
+                                                                gap: "4px",
+                                                                border: "1px solid #E2E8F0",
+                                                                fontSize: '11px',
+                                                                color: isLoading ? '#e0e0e0' : '#64748B',
+                                                                fontFamily: 'Open Sans, sans-serif',
+                                                            }}>
+                                                                <RateReviewIcon sx={{ fontSize: '15px' }} /> New Chat
+                                                            </MuiButton>
+                                                        </Box>
                                                     </Box>
+                                                    {isHistoryOpen ? (
+                                                        <ChatHistoryPanel
+                                                            histories={historyItems}
+                                                            selectedHistoryId={selectedHistoryId}
+                                                            loading={false}
+                                                            onSelect={handleSelectHistory}
+                                                            onCreateNew={handleClear}
+                                                            onRename={handleRenameHistory}
+                                                            onDelete={handleDeleteHistory}
+                                                            onClose={() => setIsHistoryOpen(false)}
+                                                        />
+                                                    ) : (
+                                                        <>
                                                     {/* Add example queries section */}
                                                     {chatHistory.length === 0 && (<div className='empty-components-container'>
                                                         <div className="empty-page-title" style={{ paddingTop: '1rem' }}>
@@ -1084,6 +1177,8 @@ function LLMAgent() {
                                                             }}
                                                         />
                                                     </div>
+                                                        </>
+                                                    )}
                                                 </div>
                                             </Grid>
                                             <Grid item xs={5} height={"100%"}>

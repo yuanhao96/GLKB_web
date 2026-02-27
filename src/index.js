@@ -16,6 +16,7 @@ import HomePage from './components/HomePage';
 import LLMAgent from './components/LLMAgent';
 import ResultPage from './components/ResultPage';
 import TestAuth from './components/TestAuth';
+import TestChatHistoryAPI from './components/testChatHistoryAPI';
 import LoginPage from './components/Auth/LoginPage';
 import VerifyCodePage from './components/Auth/VerifyCodePage';
 // import SignupPage from './components/Auth/SignupPage';
@@ -38,6 +39,7 @@ function AppWithRoutes() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/chat" element={<LLMAgent />} />
             <Route path="/test-auth" element={<TestAuth />} />
+            <Route path="/test-chat-history-api" element={<TestChatHistoryAPI />} />
             
             {/* Authentication routes */}
             <Route path="/login" element={<LoginPage />} />
@@ -55,7 +57,7 @@ root.render(
     <Router>
         <AuthProvider>
             <AppWithRoutes />
+            <TestChatHistoryAPI />
         </AuthProvider>
     </Router>
 );
-
