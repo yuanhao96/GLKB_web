@@ -241,12 +241,12 @@
 
 .chat-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding-left: 56px;
-    padding-right: 56px;
-    padding-top: 0px;
-    padding-bottom: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 16px;
+    padding-bottom: 24px;
     gap: 20px;
     background: white;
     width: 100%;
@@ -267,6 +267,11 @@
     transform: none;
     width: 100%;
     max-width: 100%;
+}
+
+.chat-header .input-form {
+    max-width: 720px;
+    width: 100%;
 }
 
 .clear-button {

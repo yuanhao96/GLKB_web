@@ -1012,24 +1012,33 @@ function LLMAgent() {
                                                             variant="outlined"
                                                             placeholder="Ask a question about the biomedical literature..."
                                                             sx={{
-                                                                backgroundColor: '#F4F9FE',
+                                                                backgroundColor: '#FFFFFF',
                                                                 borderRadius: '30px',
-                                                                minHeight: '60px', // Increase the height of the input box
+                                                                minHeight: '60px',
                                                                 '& .MuiInputBase-root': {
                                                                     height: '60px',
                                                                     borderRadius: '30px',
-                                                                    alignItems: 'center', // Center the text vertically
+                                                                    alignItems: 'center',
                                                                     fontFamily: 'Open Sans, sans-serif',
                                                                     '& fieldset': {
-                                                                        border: 'none'
+                                                                        border: '1px solid #E6F0FC'
                                                                     },
                                                                     boxShadow: '0px 2px 3px -1px #00000026',
                                                                 },
                                                                 '& .MuiInputBase-input': {
                                                                     paddingLeft: '4px',
+                                                                    paddingRight: '0',
+                                                                    fontFamily: 'Open Sans, sans-serif',
+                                                                    fontSize: '16px',
+                                                                    lineHeight: '24px',
+                                                                    color: '#1A202C',
+                                                                    '&::placeholder': {
+                                                                        color: '#A0AEC0',
+                                                                        opacity: 1,
+                                                                    },
                                                                 },
                                                                 '& .MuiOutlinedInput-notchedOutline': {
-                                                                    borderColor: 'grey', // Optional: Customize border color
+                                                                    borderColor: 'transparent',
                                                                 },
                                                                 "& .MuiOutlinedInput-root": {
                                                                     paddingLeft: "0px!important",
