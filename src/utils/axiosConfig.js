@@ -26,29 +26,38 @@ const isGuestAllowedRequest = (url = '') => {
   return GUEST_ALLOWED_ENDPOINT_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 };
 
+const getStoredAuth = () => {
+  const token = localStorage.getItem('access_token');
+  const tokenType = localStorage.getItem('token_type') || 'bearer';
+  return {
+    token,
+    tokenType,
+    isAuthenticated: Boolean(token),
+  };
+};
+
 /**
  * Axios Interceptor Setup
  * Automatically includes JWT token in all API requests
  */
 
-// Configure base URL for deployed environments
-// In local dev, setupProxy.js handles the proxying
-if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'https://backend.glkb.org/reorg-api';
-}
+// Configure base URL via environment variable (e.g. .env.development / .env.production)
+// Prefer deriving API base URL from REACT_APP_API_PROXY_TARGET when available.
+const proxyTarget = (process.env.REACT_APP_API_PROXY_TARGET || '').trim().replace(/\/+$/, '');
+const derivedApiBaseUrl = proxyTarget ? `${proxyTarget}/reorg-api` : '';
+axios.defaults.baseURL = derivedApiBaseUrl || 'https://glkb.dcmb.med.umich.edu/reorg-api';
 
 // Request interceptor to add JWT token to headers
 axios.interceptors.request.use(
   (config) => {
-    if (isGuestAllowedRequest(config.url)) {
+    const { token, tokenType, isAuthenticated } = getStoredAuth();
+
+    if (isGuestAllowedRequest(config.url) && !isAuthenticated) {
       if (config.headers?.Authorization) {
         delete config.headers.Authorization;
       }
       return config;
     }
-
-    const token = localStorage.getItem('access_token');
-    const tokenType = localStorage.getItem('token_type') || 'bearer';
     
     if (token) {
       config.headers.Authorization = `${tokenType} ${token}`;
@@ -82,7 +91,8 @@ axios.interceptors.response.use(
     }
     if (error.response?.status === 401) {
       const requestUrl = error.config?.url || '';
-      if (isGuestAllowedRequest(requestUrl)) {
+      const { isAuthenticated } = getStoredAuth();
+      if (isGuestAllowedRequest(requestUrl) && !isAuthenticated) {
         return Promise.reject(error);
       }
 

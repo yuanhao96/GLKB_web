@@ -17,7 +17,7 @@ import {
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 import logoIcon from '../../img/GLKB_logo_icon.png';
-import logoWordmark from '../../img/navbar/logo.jpg';
+import logoWordmark from '../../img/navbar/logo.png';
 import { trackGtagEvent } from '../../utils/gtag';
 import NavBarWhite from '../Units/NavBarWhite';
 
